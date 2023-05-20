@@ -5,4 +5,4 @@ RUN pip install requests
 COPY main.py .
 COPY main.sh .
 
-CMD bash run.sh
+CMD bash main.sh
