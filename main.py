@@ -11,6 +11,13 @@ if __name__ == '__main__':
     right_path = os.environ.get('_RIGHT')
     uid = os.environ.get('_UID')
     arg = os.environ.get('_ARG')
+    print('INPUTS:')
+    print('\t_API_SERVER: ', api_server)
+    print('\t_SELF: ', pod_uid)
+    print('\t_LEFT: ', left_path)
+    print('\t_RIGHT: ', right_path)
+    print('\t_UID: ', uid)
+    print('\t_ARG: ', arg)
 
     ret = func.run(arg)
     if func.check(ret):

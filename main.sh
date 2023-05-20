@@ -7,3 +7,4 @@ bash pre_run.sh
 echo "[pre_run] OK"
 python main.py
 echo "[main] OK"
+sleep 10
