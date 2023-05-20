@@ -6,7 +6,7 @@ import func
 
 if __name__ == '__main__':
     api_server = os.environ.get('_API_SERVER')
-    pod_url = os.environ.get('_POD_URL')
+    pod_uid = os.environ.get('_SELF')
     left_path = os.environ.get('_LEFT')
     right_path = os.environ.get('_RIGHT')
     uid = os.environ.get('_UID')
@@ -17,11 +17,12 @@ if __name__ == '__main__':
         path = left_path
     else:
         path = right_path
-    url = api_server + '/' + left_path + '/' + uid
-    response = requests.post(url + "/" + uid, data=ret)
+    next_url = api_server + '/api/funcs/' + left_path + '/' + uid
+    response = requests.put(next_url, data=ret)
     if response.status_code == 200:
         print('Request was successful!')
         print(response.text)
     else:
         print('Request failed with status code:', response.status_code)
+    pod_url = api_server + '/api/pods/' + pod_uid
     response = requests.delete(pod_url)
