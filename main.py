@@ -24,7 +24,7 @@ if __name__ == '__main__':
         path = left_path
     else:
         path = right_path
-    next_url = api_server + '/api/funcs/' + left_path + '/' + uid
+    next_url = api_server + '/api/funcs/' + path + '/' + uid
     response = requests.put(next_url, data=ret)
     if response.status_code == 200:
         print('Call next function was successful!')
