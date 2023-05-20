@@ -20,9 +20,14 @@ if __name__ == '__main__':
     next_url = api_server + '/api/funcs/' + left_path + '/' + uid
     response = requests.put(next_url, data=ret)
     if response.status_code == 200:
-        print('Request was successful!')
+        print('Call next function was successful!')
         print(response.text)
     else:
-        print('Request failed with status code:', response.status_code)
+        print('Call next function failed with status code:', response.status_code)
     pod_url = api_server + '/api/pods/' + pod_uid
     response = requests.delete(pod_url)
+    if response.status_code == 200:
+        print('Delete was successful!')
+        print(response.text)
+    else:
+        print('Delete failed with status code:', response.status_code)
