@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-wget -O pre_run.sh $_PRE_RUN
-wget -O func.py $_FUNC
+echo "$_PRE_RUN" | base64 -d >pre_run.sh
+echo "$_FUNC" | base64 -d >func.py
 
 bash pre_run.sh
 echo "[pre_run] OK"

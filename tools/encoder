@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$#" != 1 ]; then
+  echo "usage: encoder FILE"
+  exit
+fi
+
+base64 "$1" | tr -d '\n'
+echo
