@@ -1,26 +1,22 @@
 SRC = src
-DEST = build
-ENCODER = tools/encoder
-SRC_EXAMPLE = examples
-FILES_EXAMPLE := $(wildcard $(SRC_EXAMPLE)/*)
-DEST_EXAMPLE = $(DEST)/examples
+REPO ?= lwsg
+IMAGES := $(notdir $(wildcard $(SRC)/*))
+DOCKER_BUILD = docker build
+DOCKER_BUILDFLAG = -t
+DOCKER_IMAGE_REMOVE = docker image rm
 
-.PHONY: error
-error:
-	@echo "Please choose one of the following targets: example, image, clean"
 
-$(DEST_EXAMPLE):
-	mkdir -p $(DEST_EXAMPLE)
+.PHONY: all
+all: images
 
-.PHONY: example
-example: $(FILES_EXAMPLE) $(DEST_EXAMPLE)
-	$(foreach file,$(FILES_EXAMPLE),$(ENCODER) $(file) > $(DEST_EXAMPLE)/$(notdir $(file)).base64;)
+.PHONY: images
+images:
+	$(foreach image,$(IMAGES),$(DOCKER_BUILD) $(DOCKER_BUILDFLAG) $(REPO)/$(image) $(SRC)/$(image);)
 
-.PHONY: image
-image:
-	docker build -t lwsg/func-runner $(SRC)
 
 .PHONY: clean
-clean:
-	rm -rf $(DEST)
+clean: clean_images
 
+.PHONY: clean_images
+clean_images:
+	$(foreach image,$(IMAGES),$(DOCKER_IMAGE_REMOVE) $(REPO)/$(image);)
