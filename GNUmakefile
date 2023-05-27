@@ -4,6 +4,7 @@ IMAGES := $(notdir $(wildcard $(SRC)/*))
 DOCKER_BUILD = docker build
 DOCKER_BUILDFLAG = -t
 DOCKER_IMAGE_REMOVE = docker image rm
+DOCKER_PUSH = docker push
 
 
 .PHONY: all
@@ -13,6 +14,10 @@ all: images
 images:
 	$(foreach image,$(IMAGES),$(DOCKER_BUILD) $(DOCKER_BUILDFLAG) $(REPO)/$(image) $(SRC)/$(image);)
 
+
+.PHONY: push
+push: images
+	$(foreach image,$(IMAGES),$(DOCKER_PUSH) $(REPO)/$(image);)
 
 .PHONY: clean
 clean: clean_images
